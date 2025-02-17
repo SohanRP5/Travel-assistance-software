@@ -1,0 +1,434 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover your next adventure with our travel guide. Explore the world’s best destinations, travel services, and expert advice to make your trip unforgettable.">
+    <meta name="keywords" content="travel guide, best destinations, vacation planning, tour guides, hotel booking, travel services">
+    <meta name="author" content="Travel Guide Team">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Travel Guide - Home">
+    <meta property="og:description" content="Explore the world's most stunning destinations and plan your perfect vacation with our travel services.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630">
+    <meta property="og:url" content="https://www.yourwebsite.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Travel Guide - Home">
+    <meta name="twitter:description" content="Your gateway to the world’s best destinations. Travel planning, hotel bookings, and expert tours.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630">
+    <title>Travel Guide - Home</title>
+    <link rel="canonical" href="https://www.yourwebsite.com">
+    <style>
+     /* General body styles */
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    background-image: url("https://wallpaperaccess.com/full/1431632.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Header styles */
+header {
+    background-color: darkslateblue;
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 2px; /* Add space between letters for a more dramatic effect */
+}
+
+/* Navigation styles */
+nav {
+    background-color: #333;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background-color: #575757;
+    color: #fff;
+}
+
+/* Hero section styles */
+.hero {
+    background: url('static/image5.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(26, 30, 32);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    height: 300px;
+    position: relative;
+    animation: fadeIn 2s ease-in-out;
+    border-bottom: 5px solid #3498db; /* Add a bottom border to the hero section */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+    z-index: 2;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Add shadow for better readability */
+}
+
+/* Container and section styles */
+.container {
+    padding: 40px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.2em;
+    text-transform: capitalize;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+/* Featured destinations */
+.featured-destinations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.destination-card {
+    flex: 1;
+    max-width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.destination-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.destination-card img {
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+
+.destination-card:hover img {
+    transform: scale(1.1);
+}
+
+.destination-card h3 {
+    padding: 15px;
+    margin: 0;
+    font-size: 1.4em;
+    color: #333;
+}
+
+.destination-card p {
+    padding: 0 15px 15px;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Testimonials section */
+.testimonials {
+    background-color: #f4f4f4;
+    padding: 40px 20px;
+    border-radius: 8px;
+}
+
+.testimonial {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 5px solid #104511;
+    background: white;
+    font-style: italic;
+}
+
+.testimonial p {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Services section */
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    border: 1px solid #115b74;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgb(242, 239, 239);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+    font-size: 1.6em;
+    color: #0c0b0b;
+}
+
+.service-card p {
+    color: #666;
+    font-size: 1em;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade-in animation for hero section */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .destination-card {
+        max-width: 100%;
+    }
+
+    .destination-card h3 {
+        font-size: 1.2em;
+    }
+
+    .search-bar input[type="text"] {
+        width: 100%;
+    }
+}
+
+/* Search bar styles */
+.search-bar {
+    text-align: center;
+    padding: 20px;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 30px; /* Add space below search bar */
+}
+
+.search-bar form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    transition: all 0.3s ease;
+}
+
+.search-bar input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    font-size: 1.2em;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.search-bar button:active {
+    background-color: #004085;
+    transform: translateY(2px);
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.search-bar input[type="text"]:focus::placeholder {
+    color: transparent;
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 1.5em;
+    color: #007bff;
+    pointer-events: none;
+}
+
+
+    </style>
+  </head>
+  <body>
+    <header>
+        Universal Destinations
+    </header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="services.html">Services</a>
+    </nav>
+    <section class="hero">
+        <h1>Discover Your Next Adventure</h1>
+      </section>
+      
+    <!-- Search Bar Section -->
+<section class="search-bar">
+    <form action="/search" method="GET">
+        <input type="text" name="query" placeholder="Search for destinations..." required>
+        <button type="submit">Search</button>
+    </form>
+</section>
+
+    <!-- Search Engine Box with Location Suggestions -->
+    
+
+    <div class="container">
+      <section class="section featured">
+        <h2>Featured Destinations</h2>
+        <div class="featured-destinations">
+          <div class="destination-card">
+            <div class="destination-box">
+              <!-- Image of Paris -->
+              <div class="destination-box" onclick="window.location.href='{{ url_for('book', destination='paris') }}'">
+                <!-- Image of Paris -->
+                <img src="static/image1.jpg" alt="Paris">
+                
+                <!-- Heading and description -->
+                <h3>Paris</h3>
+                <p>Explore the city of love with its stunning art, cuisine, and monuments.</p>
+            </div>
+            
+            
+          
+            
+          </div>
+          
+          </div>
+          <div class="destination-card" onclick="window.location.href='{{ url_for('book', destination='tokyo') }}'">
+            <img src="static/image2.jpg" alt="Tokyo">
+            <h3>Tokyo</h3>
+            <p>Experience a mix of tradition and technology in Japan's bustling capital.</p>
+        </div>
+        
+        <div class="destination-card" onclick="window.location.href='{{ url_for('book', destination='newyork') }}'">
+          <img src="static/image3.jpeg" alt="New York">
+          <h3>New York</h3>
+          <p>See the iconic landmarks of the Big Apple, from Broadway to Central Park.</p>
+      </div>
+      
+      <div class="destination-card" onclick="window.location.href='{{ url_for('book', destination='sydney') }}'">
+        <img src="static/image4.jpg" alt="Sydney">
+        <h3>Sydney</h3>
+        <p>Enjoy the vibrant beaches and culture of Australia’s harbor city.</p>
+    </div>
+    
+        </div>
+      </section>
+      <section class="section services">
+        <h2>Our Services</h2>
+        <div class="services">
+          <div class="service-card">
+            <h3>Travel Planning</h3>
+            <p>Customized itineraries tailored to your preferences and budget.</p>
+          </div>
+          <div class="service-card">
+            <h3>Hotel Booking</h3>
+            <p>Exclusive deals with top hotels worldwide to ensure comfort.</p>
+          </div>
+          <div class="service-card">
+            <h3>Tour Guides</h3>
+            <p>Expert local guides to make your trips memorable and insightful.</p>
+          </div>
+        </div>
+      </section>
+  
+    </div>
+    <footer>
+      &copy; 2024 Travel Guide. Your gateway to the world's most stunning destinations.
+    </footer>
+
+  
+  </body>
+</html>

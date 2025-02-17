@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resort & Travel Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #c3a7bc;
+            padding-top: 50px;
+            color: #ecf0f1;
+        }
+
+        h1 {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: #ecf0f1;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .alert-danger {
+            background-color: #c0392b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .alert-danger strong {
+            font-size: 1.2rem;
+        }
+
+        /* Buttons */
+        .btn-info {
+            background-color: #3498db;
+            border-color: #2980b9;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        .btn-info:hover {
+            background-color: #2980b9;
+            border-color: #1f5d88;
+            transform: scale(1.05);
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            border-color: #7f8c8d;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+            border-color: #5e6c70;
+            transform: scale(1.05);
+        }
+
+        /* Container */
+        .container {
+            background: #34495e;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+
+        .row {
+            margin-top: 20px;
+        }
+
+        .no-images {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        /* Image Gallery */
+        img {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Booking Form */
+        .form-control {
+            border-radius: 8px;
+            border-color: #7f8c8d;
+            padding: 12px;
+            font-size: 1.1rem;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.6);
+        }
+
+        .form-label {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .btn-info, .btn-secondary {
+                width: 100%;
+                padding: 15px;
+            }
+
+            img {
+                max-height: 200px;
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Information for {{ place_name or "Unknown Place" }}</h1>
+
+        <!-- Display Error Message if any -->
+        {% if place_details.error %}
+            <div class="alert alert-danger text-center" role="alert">
+                <strong>Error:</strong> {{ place_details.error }}
+            </div>
+        {% else %}
+            <p><strong>Summary:</strong> {{ place_details.summary }}</p>
+
+            <!-- Display images if available -->
+            {% if place_details.images %}
+                <h3>Images:</h3>
+                <div class="row">
+                    {% for image in place_details.images %}
+                        <div class="col-md-4">
+                            <img src="{{ image }}" alt="Image of {{ place_name }}" class="img-fluid rounded mb-3" style="max-height: 250px; object-fit: cover;">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-images">No images available for this place.</p>
+            {% endif %}
+
+            <p class="btn-container">
+                <a href="{{ place_details.url }}" target="_blank" class="btn btn-info">Read More.........</a>
+            </p>
+        {% endif %}
+
+        <!-- Booking Form Section -->
+        <div class="mt-5">
+            <h2>Book Your Stay at {{ place_name }}</h2>
+
+            <form action="/book/{{ place_name }}" method="POST">
+                <div class="mb-3">
+                    <label for="resort" class="form-label">Select Resort:</label>
+                    <select name="resort-name" class="form-control" required>
+                        <option value="Beachside Resort">Beachside Resort</option>
+                        <option value="Mountain View Resort">Mountain View Resort</option>
+                        <option value="Lakeside Retreat">Lakeside Retreat</option>
+                        <option value="Desert Oasis">Desert Oasis</option>
+                        <option value="Hilltop Lodge">Hilltop Lodge</option>
+                        <option value="Tropical Paradise">Tropical Paradise</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="check-in" class="form-label">Check-in Date:</label>
+                    <input type="date" name="check-in" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="check-out" class="form-label">Check-out Date:</label>
+                    <input type="date" name="check-out" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rooms" class="form-label">Number of Rooms:</label>
+                    <input type="number" name="rooms" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="accessories" class="form-label">Accessories:</label>
+                    <select name="accessories" class="form-control" multiple>
+                        <option value="Wi-Fi">Wi-Fi</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Swimming Pool">Swimming Pool</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="special-request" class="form-label">Special Requests:</label>
+                    <textarea name="special-request" class="form-control"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-info">Book Now</button>
+            </form>
+        </div>
+
+        <a href="/" class="btn btn-secondary mt-4">Go Back</a>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

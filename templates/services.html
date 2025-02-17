@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Guide Statistics</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #f1f1f1;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #1e1e1e;
+            border-bottom: 2px solid #333;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #ffa726;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 400px;
+        }
+        .description {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #bdbdbd;
+        }
+        .form-container {
+            margin: 20px auto;
+            padding: 20px;
+            background: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #ffa726;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input, select, textarea, button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            width: 100%;
+            max-width: 500px;
+        }
+        input, textarea {
+            background: #1e1e1e;
+            color: #ffa726;
+            border: 2px solid #ffa726;
+        }
+        select {
+            background: #1e1e1e;
+            color: #ffa726;
+            border: 2px solid #ffa726;
+        }
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+        button {
+            background: #ffa726;
+            color: #121212;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff9800;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 10px 0;
+            background: #1e1e1e;
+            border-top: 2px solid #333;
+        }
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #bdbdbd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Recently Visited Places</h1>
+    </header>
+    <div class="container">
+        <div class="chart-container">
+            <canvas id="placesChart"></canvas>
+        </div>
+        <p class="description">
+            The pie chart shows the percentage of visits to various popular destinations based on recent data.
+        </p>
+    </div>
+    <div class="container form-container">
+        <h2>Add a Place and Provide Feedback</h2>
+        <form id="visitForm" method="post" action="/services">
+            <input type="text" id="newPlace" name="place_name" placeholder="Enter a new place" required>
+            <textarea id="feedback" name="description" placeholder="Provide your feedback" required></textarea>
+            <select id="rating" name="rating" required>
+                <option value="" disabled selected>Rate our services</option>
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Poor">Poor</option>
+            </select>
+            <button type="submit">Submit and Update Chart</button>
+        </form>
+        
+    </div>
+    <footer>
+        <p>Travel Guide © 2024 | Designed for an amazing experience!</p>
+    </footer>
+    <script>
+        // Initial data for the chart
+        const chartData = {
+            labels: [],
+            datasets: [{
+                label: 'Percentage of Visits',
+                data: [], // Initial data starts empty
+                backgroundColor: [],
+                hoverOffset: 4
+            }]
+        };
+
+        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#E67E22', '#27AE60'];
+
+        // Configuration options for the chart
+        const chartConfig = {
+            type: 'pie',
+            data: chartData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#f1f1f1',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const placesChart = new Chart(
+            document.getElementById('placesChart'),
+            chartConfig
+        );
+
+        // Form submission logic
+        const form = document.getElementById('visitForm');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent page reload
+            const newPlace = document.getElementById('newPlace').value.trim();
+            const feedback = document.getElementById('feedback').value.trim();
+            const rating = document.getElementById('rating').value;
+
+            // Add new place to chart data
+            if (newPlace && feedback && rating) {
+                chartData.labels.push(newPlace);
+                chartData.datasets[0].data.push(10); // Assign an initial value (e.g., 10%)
+                chartData.datasets[0].backgroundColor.push(colors[chartData.labels.length % colors.length]);
+
+                // Normalize data
+                const total = chartData.datasets[0].data.reduce((a, b) => a + b, 0);
+                chartData.datasets[0].data = chartData.datasets[0].data.map(value => (value / total) * 100);
+
+                // Update chart
+                placesChart.update();
+
+                // Log feedback for backend processing (if needed)
+                console.log(`New Place: ${newPlace}, Feedback: ${feedback}, Rating: ${rating}`);
+
+                // Reset form fields
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
